@@ -75,11 +75,12 @@ class eventLogs extends Contract {
         let product = JSON.parse(productAsBytes);
    
         product.Logs.push(logData);
+        product.CurrentStatus=status;
 
        await ctx.stub.putState(productId,Buffer.from(JSON.stringify(product))); 
     
-     console.log('Product event added To the ledger Succesfully..');
-     return('Product event added To the ledger Succesfully..');
+       console.log('Product event added To the ledger Succesfully..');
+       return('Product event added To the ledger Succesfully..');
     
      
        }
