@@ -9,7 +9,7 @@ class eventLogs extends Contract {
    
     let logsAsBytes = await ctx.stub.getState(productId); 
     if (!logsAsBytes || logsAsBytes.toString().length <= 0) {
-      return('Error:Logs With this ProductId doesn't exist..!');
+      return("Error:Logs With this ProductId does not exist..!");
        }
     
     else{
