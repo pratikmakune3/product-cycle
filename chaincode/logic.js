@@ -18,7 +18,7 @@ class eventLogs extends Contract {
      }
  }
     
-    async addProduct(ctx,productId,ownerName,productName) {
+    async submitProduct(ctx,productId,ownerName,productName) {
    
     let productAsBytes = await ctx.stub.getState(productId); 
     if (!productAsBytes || productAsBytes.toString().length <= 0) {
@@ -27,14 +27,14 @@ class eventLogs extends Contract {
            ProductName:productName,
            Owner:ownerName,
            Logs:[],
-           CurrentStatus:'Product Added.'
+           CurrentStatus:'Product Submitted'
            };
       let timeStamp= await stub.getTxTimestamp();
       const timestamp = new Date(timeStamp.getSeconds() * 1000).toISOString();
 
       let logData={
            Timestamp:timestamp,
-           event:'Product Added..'
+           event:'Product Submitted'
            
            };
     
@@ -42,8 +42,8 @@ class eventLogs extends Contract {
 
       await ctx.stub.putState(productId,Buffer.from(JSON.stringify(productData))); 
     
-     console.log('Product event added To the ledger Succesfully..');
-     return('Product event added To the ledger Succesfully..');
+     console.log('Product Submission event added To the ledger Succesfully..');
+     return('Product Submission event added To the ledger Succesfully..');
     
     
      }
@@ -55,6 +55,36 @@ class eventLogs extends Contract {
 
   }
 
+
+   async addEvent(ctx,productId, status){
+
+   let productAsBytes = await ctx.stub.getState(productId); 
+    if (!productAsBytes || productAsBytes.toString().length <= 0) {
+    return('Error:Product With This Id does not exist..')
+     }
+    else {
+    
+    let timeStamp= await stub.getTxTimestamp();
+    const timestamp = new Date(timeStamp.getSeconds() * 1000).toISOString();
+
+      let logData={
+           Timestamp:timestamp,
+           event:status
+           
+           };
+        let product = JSON.parse(productAsBytes);
+   
+        product.Logs.push(logData);
+
+       await ctx.stub.putState(productId,Buffer.from(JSON.stringify(product))); 
+    
+     console.log('Product event added To the ledger Succesfully..');
+     return('Product event added To the ledger Succesfully..');
+    
+     
+       }
+
+    }
 }
 
 module.exports=eventLogs;
