@@ -29,7 +29,7 @@ class eventLogs extends Contract {
            Logs:[],
            CurrentStatus:'Product Submitted'
            };
-      let timeStamp= await stub.getTxTimestamp();
+      let timeStamp= await ctx.stub.getTxTimestamp();
       const timestamp = new Date(timeStamp.getSeconds() * 1000).toISOString();
 
       let logData={
@@ -64,7 +64,7 @@ class eventLogs extends Contract {
      }
     else {
     
-    let timeStamp= await stub.getTxTimestamp();
+    let timeStamp= await ctx.stub.getTxTimestamp();
     const timestamp = new Date(timeStamp.getSeconds() * 1000).toISOString();
 
       let logData={
