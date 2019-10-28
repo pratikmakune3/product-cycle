@@ -34,7 +34,7 @@ class eventLogs extends Contract {
 
       let logData={
            Timestamp:timestamp,
-           event:'Product Submitted'
+           Status:'Submitted'
            
            };
     
@@ -69,7 +69,7 @@ class eventLogs extends Contract {
 
       let logData={
            Timestamp:timestamp,
-           event:status
+           Status:status
            
            };
         let product = JSON.parse(productAsBytes);
